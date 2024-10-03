@@ -1,0 +1,18 @@
+<head>
+  
+</head>
+<body>
+  <h1>Random Cat Pictures Overlay</h1>
+  <script type="text/javascript">
+    var link = document.createElement("a");
+    var params = new URLSearchParams();
+    link.textContent = "Connect with Twitch"
+    var url = "https://id.twitch.tv/oauth2/authorize?"
+    params.append("client_id", "wk9am7u7mkbdnuvzdlvmbfo2dfv7c3")
+    params.append("redirect_uri", "https://fosterprogramming.github.io/Twitch_App_Test/redirect.html")
+    params.append("scope", "user:read:chat") 
+    params.append("response_type", "token")
+    link.href = url + params.toString()
+    document.body.appendChild(link)
+  </script>
+</body>

@@ -1,0 +1,27 @@
+var link = document.getElementById("browser_source_link")
+var base_url = "https://fosterprogramming.github.io/Twitch_App_Test/browser_source.html"
+var params = new URLSearchParams();
+params.append("client_id", "wk9am7u7mkbdnuvzdlvmbfo2dfv7c3")
+params.append("token", parseToken())
+link.value = base_url + params.toString()
+
+var copy_button = document.getElementById("copy_button")
+copy_button.onclick = function() {
+	var link = document.getElementById("browser_source_link")
+	navigator.clipboard.writeText(link.value);
+	var hover = document.querySelector(".tooltip_hover")
+	hover.textContent = "Copied!"
+	hover.style.visibility = "visible"
+	setTimeout(restoreTextContent, 1000)
+}
+
+function restoreTextContent() {
+	var hover = document.querySelector(".tooltip_hover")
+	hover.textContent  = "Copy"
+	hover.style.visibility = "hidden"
+}
+
+function parseToken() {
+	var split = document.location.hash.split("=")
+	return (split[1])
+}

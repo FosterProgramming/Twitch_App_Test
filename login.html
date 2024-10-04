@@ -9,7 +9,9 @@
     link.textContent = "Connect with Twitch"
     var url = "https://id.twitch.tv/oauth2/authorize?"
     params.append("client_id", "wk9am7u7mkbdnuvzdlvmbfo2dfv7c3")
-    params.append("redirect_uri", "https://fosterprogramming.github.io/Twitch_App_Test/redirect.html")
+    var redirect_url = URL.parse(document.location.href)
+    redirect_url.pathname = "redirect.html"
+    params.append("redirect_uri", redirect_url.toString())
     params.append("scope", "user:read:chat") 
     params.append("response_type", "token")
     link.href = url + params.toString()

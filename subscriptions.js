@@ -2,10 +2,10 @@ var SUBSCRIPTION_URL = "https://api.twitch.tv/helix/eventsub/subscriptions"
 
 function getToken() {
 	var params = new URLSearchParams(document.location.search);
-	return params.getToken();
+	return params.get("token");
 }
 
-function getHeaders() {
+export function getHeaders() {
 	var headers = {
 		"Content-type": "application/json; charset=UTF-8",
 		"Authorization": "Bearer " + getToken(),

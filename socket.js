@@ -1,4 +1,5 @@
 import {makeSubscription} from './subscriptions.js'
+import {parseCommand} from './commands.js'
 
 var SOCKET_URL = "wss://eventsub.wss.twitch.tv/ws"
 
@@ -11,17 +12,16 @@ export function startSocket() {
 }
 
 function readSocket(data) {
-	
+	console.log(data)
 	var type = data["metadata"]["message_type"]
 	if (type == "session_welcome") {
 		var need_subscription = welcomeSession(data)
 		if (need_subscription) {
-			//makeSubscription()
+			makeSubscription()
 		}
-		
 	} else if (type == "notification") {
 		updateDeathTimer()
-		pushMessage(data)
+		parseCommand(data)
 	} else if (type == "session_keepalive") {
 		updateDeathTimer()
 	} else if (type == "session_reconnect") {
@@ -32,10 +32,7 @@ function readSocket(data) {
 	}
 }
 
-function pushMessage(data) {
-	var event = data["payload"]["event"]
-	addChatMessage(event["chatter_user_name"], event["message"]["text"])
-}
+
 
 
 

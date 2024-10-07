@@ -1,6 +1,6 @@
 var link = document.getElementById("browser_source_link")
 var base_url = URL.parse(document.location.href)//"https://fosterprogramming.github.io/Twitch_App_Test/browser_source.html?"
-base_url.pathname = "browser_source.html"
+base_url.pathname = base_url.pathname.replace("redirect.html", "browser_source.html")
 
 base_url.hash = ""
 var params = new URLSearchParams();

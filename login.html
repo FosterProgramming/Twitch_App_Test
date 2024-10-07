@@ -11,6 +11,7 @@
     params.append("client_id", "wk9am7u7mkbdnuvzdlvmbfo2dfv7c3")
     var redirect_url = URL.parse(document.location.href)
     redirect_url.pathname = "redirect.html"
+    console.log(redirect_url)
     params.append("redirect_uri", redirect_url.toString())
     params.append("scope", "user:read:chat") 
     params.append("response_type", "token")

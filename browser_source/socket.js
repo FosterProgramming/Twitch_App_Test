@@ -19,7 +19,7 @@ function  manageSocketError(event, retry_time) {
 	if (window.socket.readyState < WebSocket.CLOSING) {
 		window.socket.close()
 	}
-	setTimeout(() => {startSocket(SOCKET_URL, retry_time * 2)}, 10000)
+	setTimeout(startSocket, retry_time, SOCKET_URL, retry_time * 2)
 }
 
 function readSocket(data) {

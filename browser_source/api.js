@@ -5,13 +5,12 @@ export function makeEndpoint(endpoint) {
 	return TWITCH_API_URL + endpoint
 }
 
-export async function getModerators(retry_time = 5000) {
+export async function getModerators(retry_time = 0) {
 	var endpoint = "moderation/moderators?broadcaster_id=" + window.user_id
 	return fetch(makeEndpoint(endpoint), {"headers": getHeaders()})
 	.then(response => checkResponse(response))
 	.then(function(data) {
 		data = data["data"]
-		var moderators  = []
     	for (var i = 0; i < data.length; i++) {
     		moderators.push(data[i]["user_id"])
     	}
@@ -19,12 +18,17 @@ export async function getModerators(retry_time = 5000) {
   	})
   	.catch(error => {
 		console.error('Error when getting moderators:', error);
-		return getModerators(retry_time * 2)
+		retry_time += 5000
+		return new Promise((resolve) => {
+    		setTimeout(() => resolve(
+    			getModerators(retry_time)
+    		), retry_time)
+  		})
 	});
 }
 
 
-export async function getUserId(retry_time = 5000) {
+export async function getUserId(retry_time = 0) {
 	var endpoint = makeEndpoint("users")
 	return fetch(endpoint, {"headers": getHeaders()})
 	.then(response => checkResponse(response))
@@ -33,7 +37,12 @@ export async function getUserId(retry_time = 5000) {
   	})
   	.catch(error => {
 		console.error('Error when getting user id:', error);
-		return getUserId(retry_time * 2)
+		retry_time += 5000
+		return new Promise((resolve) => {
+    		setTimeout(() => resolve(
+    			getUserId(retry_time)
+    		), retry_time)
+  		})
 	});
 }
 

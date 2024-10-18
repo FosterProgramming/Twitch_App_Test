@@ -1,7 +1,10 @@
 <head>
-	<script type="module" src="main.js"></script>
+	
 </head>
 <body>
-	<div id="chat" class="chat">
-	</div>
+	<script type="text/javascript">
+		var base_url = URL.parse(document.location.href)
+		base_url.pathname = "browser_source.html"
+		window.location.replace(base_url.toString())
+	</script>
 </body>

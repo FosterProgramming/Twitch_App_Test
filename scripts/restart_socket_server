@@ -1,0 +1,4 @@
+#!/bin/sh
+pgrep SCREEN | awk 'NR==2' | xargs pgrep -P | xargs kill -9
+sleep 20
+screen -S mock_socket -dm ./twitch-cli event websocket start-server -p 8081

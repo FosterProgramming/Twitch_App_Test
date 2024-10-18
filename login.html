@@ -4,6 +4,10 @@
 <body>
   <h1>Random Cat Pictures Overlay</h1>
   <script type="text/javascript">
+    var scope_array = [
+        "user:read:chat",
+        "moderation:read"
+      ]
     var link = document.createElement("a");
     var params = new URLSearchParams();
     link.textContent = "Connect with Twitch"
@@ -12,7 +16,7 @@
     var redirect_url = URL.parse(document.location.href)
     redirect_url.pathname = "redirect.html"
     params.append("redirect_uri", redirect_url.toString())
-    params.append("scope", "user:read:chat") 
+    params.append("scope", scope_array.join(" ")) 
     params.append("response_type", "token")
     link.href = url + params.toString()
     document.body.appendChild(link)
